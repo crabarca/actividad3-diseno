@@ -36,3 +36,39 @@ namespace Problema1
 
     }
 }
+
+
+public string showOrder()
+{
+    var orderString = createOrder().DisplayOrder(Id, selectCombo());
+
+    if (ApplyDecorator(EnlargeComboProb))
+    {
+
+    }
+
+    if (ApplyDecorator(ExtraCheeseProb))
+    {
+
+    }
+
+    if (ApplyDecorator(ExtraMeatProb))
+    {
+
+    }
+
+    if (ApplyDecorator(RemoveVegetablesProb))
+    {
+
+    }
+
+    if (ApplyDecorator(AddBBQProb))
+    {
+
+    }
+
+    if (ApplyDecorator(AddDesertProb))
+    {
+
+    }
+}

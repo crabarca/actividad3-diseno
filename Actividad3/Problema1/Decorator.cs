@@ -4,24 +4,25 @@ using System.Text;
 
 namespace Problema1
 {
-    abstract class Decorator : AbstractOrder
+    abstract class Decorator : IOrder
     {
-        protected AbstractOrder _abstractOrder;
+        protected IOrder _IOrder;
 
-        public Decorator(AbstractOrder abstractOrder)
+        public Decorator(IOrder iOrder)
         {
-            this._abstractOrder = abstractOrder;
+            this._IOrder = iOrder;
         }
         
-        public void SetAbstractOrder(AbstractOrder abstractOrder)
+        public void SetAbstractOrder(IOrder iOrder)
         {
-            this._abstractOrder = abstractOrder;
+            this._IOrder = iOrder;
         }
-        public override string DisplayOrder(string name, string id, string comboType)
+
+        public string DisplayOrder(string id, string comboType)
         {
-            if (this._abstractOrder != null)
+            if (this._IOrder != null)
             {
-                return this._abstractOrder.DisplayOrder(name, id, comboType);
+                return this._IOrder.DisplayOrder(id, comboType);
             }
             else
             {

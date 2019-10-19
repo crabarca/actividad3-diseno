@@ -5,40 +5,79 @@ namespace Problema1
 {
     public abstract class Client
     {
-        protected Random Rnd = new Random();
+        protected RandomPercent Rnd = new RandomPercent();
         protected List<string> ComboTypes = new List<string>() { "A", "B", "C", "D", "E", "F" };
 
-        public virtual string createOrder()
+        public string selectCombo()
         {
             var Selection = Rnd.Next(0, 6);
             return ComboTypes[Selection];
         }
+
+        public abstract IOrder createOrder();
+
+    
+        public bool ApplyDecorator(double Probability)
+        {
+            var apply = false;
+            if (Rnd.getSample() < Probability)
+            {
+                apply = true;
+            }
+            return apply;
+        }
+
     }
 
     public class YouthClient : Client
     {
-        public override string createOrder()
+        private double EnlargeComboProb = 0.3;
+        private double ExtraCheeseProb = 0.2;
+        private double ExtraMeatProb = 0.15;
+        private double RemoveVegetablesProb = 0.3;
+        private double AddBBQProb = 0.25;
+        private double AddDesertProb = 0.2;
+        public RandomPercent rnd = new RandomPercent();
+
+        public override IOrder createOrder()
         {
-            var Combo = base.createOrder();
-            return $"Cliente 'joven' ordena combo {Combo}";
+            IOrder order = new YouthOrder();
+            return order;
         }
+
     }
 
     public class AdultClient : Client
     {
-        public override string createOrder()
+        private double EnlargeComboProb = 0.2;
+        private double ExtraCheeseProb = 0.15;
+        private double ExtraMeatProb = 0.1;
+        private double RemoveVegetablesProb = 0.15;
+        private double AddBBQProb = 0.1;
+        private double AddDesertProb = 0.3;
+        public RandomPercent rnd = new RandomPercent();
+
+        public override IOrder createOrder()
         {
-            var Combo = base.createOrder();
-            return $"Cliente 'adulto' ordena combo {Combo}";
+            IOrder order = new YouthOrder();
+            return order;
         }
     }
 
     public class ElderAdultClient : Client
     {
-        public override string createOrder()
+        private double EnlargeComboProb = 0.15;
+        private double ExtraCheeseProb = 0.1;
+        private double ExtraMeatProb = 0.05;
+        private double RemoveVegetablesProb = 0.05;
+        private double AddBBQProb = 0.05;
+        private double AddDesertProb = 0.2;
+        public RandomPercent rnd = new RandomPercent();
+
+        public override IOrder createOrder()
         {
-            var Combo = base.createOrder();
-            return $"Cliente 'adulto mayor' ordena combo {Combo}";
+            IOrder order = new YouthOrder();
+            return order;
         }
     }
 }
