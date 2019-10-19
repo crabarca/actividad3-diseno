@@ -7,6 +7,12 @@ namespace Problema1
     {
         protected RandomPercent Rnd = new RandomPercent();
         protected List<string> ComboTypes = new List<string>() { "A", "B", "C", "D", "E", "F" };
+        public double EnlargeComboProb { get; set; }
+        public double ExtraCheeseProb { get; set; }
+        public double ExtraMeatProb { get; set; }
+        public double RemoveVegetablesProb { get; set; }
+        public double AddBBQProb { get; set; }
+        public double AddDesertProb { get; set; }
 
         public string selectCombo()
         {
@@ -27,17 +33,24 @@ namespace Problema1
             return apply;
         }
 
+        public void PrintOrder(IOrder order, string Id)
+        {
+            Console.WriteLine(order.DisplayOrder(Id, selectCombo()));
+        }
+
     }
 
     public class YouthClient : Client
     {
-        private double EnlargeComboProb = 0.3;
-        private double ExtraCheeseProb = 0.2;
-        private double ExtraMeatProb = 0.15;
-        private double RemoveVegetablesProb = 0.3;
-        private double AddBBQProb = 0.25;
-        private double AddDesertProb = 0.2;
-        public RandomPercent rnd = new RandomPercent();
+        public YouthClient()
+        {
+            EnlargeComboProb = 0.3;
+            ExtraCheeseProb = 0.2;
+            ExtraMeatProb = 0.15;
+            RemoveVegetablesProb = 0.3;
+            AddBBQProb = 0.25;
+            AddDesertProb = 0.2;
+        }
 
         public override IOrder createOrder()
         {
@@ -49,34 +62,38 @@ namespace Problema1
 
     public class AdultClient : Client
     {
-        private double EnlargeComboProb = 0.2;
-        private double ExtraCheeseProb = 0.15;
-        private double ExtraMeatProb = 0.1;
-        private double RemoveVegetablesProb = 0.15;
-        private double AddBBQProb = 0.1;
-        private double AddDesertProb = 0.3;
-        public RandomPercent rnd = new RandomPercent();
+        public AdultClient()
+        {
+            EnlargeComboProb = 0.2;
+            ExtraCheeseProb = 0.15;
+            ExtraMeatProb = 0.1;
+            RemoveVegetablesProb = 0.15;
+            AddBBQProb = 0.1;
+            AddDesertProb = 0.3;
+        }
 
         public override IOrder createOrder()
         {
-            IOrder order = new YouthOrder();
+            IOrder order = new AdultOrder();
             return order;
         }
     }
 
     public class ElderAdultClient : Client
     {
-        private double EnlargeComboProb = 0.15;
-        private double ExtraCheeseProb = 0.1;
-        private double ExtraMeatProb = 0.05;
-        private double RemoveVegetablesProb = 0.05;
-        private double AddBBQProb = 0.05;
-        private double AddDesertProb = 0.2;
-        public RandomPercent rnd = new RandomPercent();
-
+        public ElderAdultClient()
+        {
+            EnlargeComboProb = 0.15;
+            ExtraCheeseProb = 0.1;
+            ExtraMeatProb = 0.05;
+            RemoveVegetablesProb = 0.05;
+            AddBBQProb = 0.05;
+            AddDesertProb = 0.2;
+        }
+        
         public override IOrder createOrder()
         {
-            IOrder order = new YouthOrder();
+            IOrder order = new ElderAdultOrder();
             return order;
         }
     }

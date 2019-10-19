@@ -4,71 +4,112 @@ namespace Problema1
 {
     class Program
     {  
-    public class Client
+    public class Simulation
         {
             // The client code works with all objects using the Component interface.
             // This way it can stay independent of the concrete classes of
             // components it works with.
-            public void ClientCode(AbstractOrder order)
+            Random Rnd = new Random();
+
+            public void run(int numberIterations)
             {
-                Console.WriteLine("RESULT: " + order.DisplayOrder("joven", "1", "F"));
+                for (int i = 0; i <= numberIterations; i++)
+                {
+                    var amountClients = Rnd.Next(0, 11);
+
+                    for (int j = 0; j <= amountClients; j++)
+                    {
+                        var clientType = Rnd.Next(0, 3);
+                        Client client;
+                        if (clientType == 0)
+                        {
+                            client = new YouthClient();
+                        }
+
+                        else if (clientType == 1)
+                        {
+                            client = new AdultClient();
+                        }
+
+                        else
+                        {
+                            client = new ElderAdultClient();
+                        }
+
+                        IOrder order = client.createOrder();
+
+                        Decorator decorator;
+                        if (client.ApplyDecorator(client.EnlargeComboProb))
+                        {
+                            decorator = new EnlargeComboDecorator();
+                        }
+
+                        EnlargeComboDecorator order2;
+                        if (client.ApplyDecorator(client.ExtraCheeseProb))
+                        {
+                            decorator = new EnlargeComboDecorator(decorator);
+                        }
+                        else
+                        {
+                            order2 = (Problema1.EnlargeComboDecorator)order1;
+                        }
+
+                        EnlargeComboDecorator order3;
+                        if (client.ApplyDecorator(client.ExtraMeatProb))
+                        {
+                            order3 = new EnlargeComboDecorator(order2);
+                        }
+                        else
+                        {
+                            order3 = (Problema1.EnlargeComboDecorator)order2;
+                        }
+
+                        EnlargeComboDecorator order4;
+                        if (client.ApplyDecorator(client.RemoveVegetablesProb))
+                        {
+                            order4 = new EnlargeComboDecorator(order3);
+                        }
+                        else
+                        {
+                            order4 = (Problema1.EnlargeComboDecorator)order3;
+                        }
+
+                        EnlargeComboDecorator order5;
+                        if (client.ApplyDecorator(client.AddBBQProb))
+                        {
+                            order5 = new EnlargeComboDecorator(order4);
+                        }
+                        else
+                        {
+                            order5 = (Problema1.EnlargeComboDecorator)order4;
+                        }
+
+                        EnlargeComboDecorator order6;
+                        if (client.ApplyDecorator(client.AddDesertProb))
+                        {
+                            order6 = new EnlargeComboDecorator(order5);
+                        }
+                        else
+                        {
+                            order6 = (Problema1.EnlargeComboDecorator)order5;
+                        }
+
+                        Console.WriteLine(order6.DisplayOrder("1", client.selectCombo()));
+                    }
+                }
+                
             }
+
+
         }
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Client client = new Client();
-            var simple = new Order();
-
-            client.ClientCode(simple);
-
-            Console.WriteLine();
-
-            // ...as well as decorated ones.
-            //
-            // Note how decorators can wrap not only simple components but the
-            // other decorators as well.
-            EnlargeComboDecorator decorator1 = new EnlargeComboDecorator(simple);
-            Console.WriteLine("Client: Now I've got a decorated component:");
-            client.ClientCode(decorator1);
+            Simulation simulation = new Simulation();
+            int numberIterations = 5;
+            simulation.run(numberIterations);
         }
 
-
-    }
-}
-
-
-public string showOrder()
-{
-    var orderString = createOrder().DisplayOrder(Id, selectCombo());
-
-    if (ApplyDecorator(EnlargeComboProb))
-    {
-
-    }
-
-    if (ApplyDecorator(ExtraCheeseProb))
-    {
-
-    }
-
-    if (ApplyDecorator(ExtraMeatProb))
-    {
-
-    }
-
-    if (ApplyDecorator(RemoveVegetablesProb))
-    {
-
-    }
-
-    if (ApplyDecorator(AddBBQProb))
-    {
-
-    }
-
-    if (ApplyDecorator(AddDesertProb))
-    {
 
     }
 }
