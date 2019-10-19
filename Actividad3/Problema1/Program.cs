@@ -6,7 +6,11 @@ namespace Problema1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IOrder order = new YouthOrder();
+            Console.WriteLine(order.EnlargeCombo());
+
+            Client client = new YouthClient();
+            Console.WriteLine(client.createOrder());
         }
     }
 }
